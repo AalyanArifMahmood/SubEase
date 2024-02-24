@@ -31,5 +31,5 @@
 
 .flexbox {
     flex: auto;
-
+    align-items: flex-end;
 }
