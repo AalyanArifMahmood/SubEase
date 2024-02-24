@@ -1,11 +1,14 @@
-import Image from "next/image";
 import styles from "./page.module.css";
-import AddListing from "@/components/Listings/AddListing";
+import Apartment from "../components/Apartment/Apartment";
 
 export default function Home() {
   return (
     <>
-    <AddListing/>
+      <Apartment />
+      <Apartment />
+      <Apartment />
+      <Apartment />
+      <Apartment />
     </>
   );
 }
