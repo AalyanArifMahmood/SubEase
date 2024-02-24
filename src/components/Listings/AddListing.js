@@ -82,9 +82,8 @@ export default function AddListing() {
                 <TextField id={"address"} value={address} onChange={handleChange(setAddress)} className={classNames.textField} label="Address" required />
                 <TextField id={"price"} value={price} onChange={handleChange(setPrice)} className={classNames.textField} label="Price" type="number" prefix="$" />
                 <TextField id={"contact"} value={contact} onChange={handleChange(setContact)} className={classNames.textField} label="Contact Information" required />
-                <PrimaryButton onClick={submitListing}>Submit</PrimaryButton>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', gap: "5%" }}>
                 <PrimaryButton onClick={handleOpen}>
                     Add Image
                 </PrimaryButton>
@@ -96,6 +95,7 @@ export default function AddListing() {
                     maxFileSize={5000000}
                     onClose={handleClose}
                 />
+                <PrimaryButton onClick={submitListing}>Submit</PrimaryButton>
             </div>
         </div>
     );
