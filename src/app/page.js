@@ -1,10 +1,10 @@
 import styles from "./page.module.css";
-import Holder from "../components/Apartment/Holder";
+import Mainpage from "../components/Mainpage/Mainpage"
 
 export default function Home() {
   return (
     <>
-      <Holder/>
+      <Mainpage/>
     </>
   );
 }
