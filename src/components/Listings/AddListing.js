@@ -6,7 +6,8 @@ import { getAnalytics } from "firebase/analytics";
 import { TextField, PrimaryButton } from '@fluentui/react';
 import { DropzoneDialog } from 'material-ui-dropzone';
 import { mergeStyleSets } from "@fluentui/react";
-import { getDatabase, ref, push } from "firebase/database";
+import { getDatabase, ref as databaseRef, push, set } from "firebase/database";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDRVw3h88OaQfxhP0sXorKT2wC8rZhoxDA",
@@ -21,7 +22,9 @@ const firebaseConfig = {
 
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const analytics = getAnalytics();
+const database = getDatabase();
+const storage = getStorage();
 
 
 const classNames = mergeStyleSets({
@@ -38,8 +41,12 @@ const classNames = mergeStyleSets({
 });
 
 export default function AddListing() {
-    const database = getDatabase();
     const [open, setOpen] = useState(false);
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [address, setAddress] = useState('');
+    const [price, setPrice] = useState('');
+    const [contact, setContact] = useState('');
     const [files, setFiles] = useState([])
 
     const handleOpen = () => setOpen(true);
@@ -50,34 +57,50 @@ export default function AddListing() {
         handleClose();
     };
 
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [address, setAddress] = useState('');
-    const [price, setPrice] = useState('');
-    const [contact, setContact] = useState('');
-
     const handleChange = (setter) => (e) => setter(e.target.value);
 
     const submitListing = () => {
-        if (!name.trim() || !description.trim() || !address.trim() || !price.toString().trim() || !contact.trim()) {
-            alert("Please fill in all fields before submitting.");
-            return; 
+        // Simple validation
+        if (!name.trim() || !description.trim() || !address.trim() || isNaN(Number(price)) || Number(price) <= 0 || !contact.trim() || files.length === 0) {
+            alert("Please fill in all fields correctly and add at least one image before submitting.");
+            return;
         }
 
-        const listingsRef = ref(database, 'listings');
-        const newListingRef = push(listingsRef);
-        push(newListingRef, {
-            name,
-            description,
-            address,
-            price: Number(price), 
-            contact,
-        }).then(() => {
-            console.log("Listing added successfully!");
-        }).catch((error) => {
-            console.error("Error adding listing: ", error);
-        });
+        // Function to upload a single file to Firebase Storage and return the URL
+        const uploadFile = (file) => {
+            const uploadRef = storageRef(storage, `listings/${address}/${file.name}`);
+            return uploadBytes(uploadRef, file).then(snapshot => getDownloadURL(snapshot.ref));
+        };
+
+        // Upload all files and collect their URLs
+        Promise.all(files.map(file => uploadFile(file)))
+            .then(urls => {
+                // All files uploaded successfully, now add listing to database
+                const listingData = {
+                    name: name,
+                    description: description,
+                    address: address,
+                    price: Number(price),
+                    contact: contact,
+                    imageUrls: urls // Save all image URLs as an array
+                };
+
+                const newListingRef = databaseRef(database, `listings/${address}`);
+                set(newListingRef, listingData)
+                    .then(() => {
+                        alert("Listing added successfully with all images!");
+                    })
+                    .catch(error => {
+                        console.error("Error saving listing to database: ", error);
+                        alert("Error saving listing");
+                    });
+            })
+            .catch(error => {
+                console.error("Error uploading files: ", error);
+                alert("Error uploading images");
+            });
     };
+
 
     return (
         <div>
