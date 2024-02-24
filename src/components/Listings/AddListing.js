@@ -38,11 +38,13 @@ const classNames = mergeStyleSets({
 
 export default function AddListing() {
     const [open, setOpen] = useState(false);
+    const [files, setFiles] = useState([])
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const handleSave = (files) => {
         console.log('Files:', files);
+        setFiles(files);
         handleClose();
     };
 
