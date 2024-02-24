@@ -1,8 +1,10 @@
 "use client";
-import React from 'react';
+
+import React, { useState } from 'react';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { TextField } from '@fluentui/react';
+import { TextField, PrimaryButton } from '@fluentui/react';
+import { DropzoneDialog } from 'material-ui-dropzone';
 import { mergeStyleSets } from "@fluentui/react";
 
 const firebaseConfig = {
@@ -21,14 +23,6 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 
-/**
- * name of listing
- * description
- * address
- * photo
- * price
- * contact information
- */
 const classNames = mergeStyleSets({
     container: {
         display: 'flex',
@@ -43,13 +37,37 @@ const classNames = mergeStyleSets({
 });
 
 export default function AddListing() {
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const handleSave = (files) => {
+        console.log('Files:', files);
+        handleClose();
+    };
+
     return (
-        <div className={classNames.container}>
-            <TextField id={"name"} className={classNames.textField} label="Name of Listing" required />
-            <TextField id={"description"} className={classNames.textField} label="Description"  autoAdjustHeight />
-            <TextField id={"address"} className={classNames.textField} label="Address" required />
-            <TextField id={"price"} className={classNames.textField} label="Price" type="number" prefix="$" />
-            <TextField id={"contact"} className={classNames.textField} label="Contact Information" required />
+        <div>
+            <div className={classNames.container}>
+                <TextField id={"name"} className={classNames.textField} label="Name of Listing" required />
+                <TextField id={"description"} className={classNames.textField} label="Description" autoAdjustHeight />
+                <TextField id={"address"} className={classNames.textField} label="Address" required />
+                <TextField id={"price"} className={classNames.textField} label="Price" type="number" prefix="$" />
+                <TextField id={"contact"} className={classNames.textField} label="Contact Information" required />
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                <PrimaryButton onClick={handleOpen}>
+                    Add Image
+                </PrimaryButton>
+                <DropzoneDialog
+                    open={open}
+                    onSave={handleSave}
+                    acceptedFiles={['image/jpeg', 'image/png', 'image/bmp']}
+                    showPreviews={true}
+                    maxFileSize={5000000}
+                    onClose={handleClose}
+                />
+            </div>
         </div>
     );
 }
