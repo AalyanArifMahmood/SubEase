@@ -1,14 +1,10 @@
 import styles from "./page.module.css";
-import Apartment from "../components/Apartment/Apartment";
+import Holder from "../components/Apartment/Holder";
 
 export default function Home() {
   return (
     <>
-      <Apartment />
-      <Apartment />
-      <Apartment />
-      <Apartment />
-      <Apartment />
+      <Holder/>
     </>
   );
 }

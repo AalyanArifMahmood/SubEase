@@ -1,0 +1,9 @@
+.flexbox {
+    display: flex;
+    justify-content: center;
+    column-gap: 70px;
+    row-gap: 30px;
+    margin: 10px;
+    flex-wrap: wrap;
+    max-width: 1280px;
+}
