@@ -5,15 +5,17 @@ export default function Holder()
 {
     return (
         <>
-        <div className={styles.flexbox}>
-          <Apartment/>
-          <Apartment/>
-          <Apartment/>
-          <Apartment/>
-          <Apartment/>
-          <Apartment/>
-          <Apartment/>
-          <Apartment/>
+        <div className={styles.box}>
+          <div className={styles.flexbox}>
+            <Apartment/>
+            <Apartment/>
+            <Apartment/>
+            <Apartment/>
+            <Apartment/>
+            <Apartment/>
+            <Apartment/>
+            <Apartment/>
+          </div>
         </div>
         </>
     );

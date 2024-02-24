@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    width: 100%;
+    align-items: center;
+    height: 100px;
+  }
+  
+.button_container {
+    flex: 0 1 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+  
+.button_container_seasons {
+    flex: 0 1 auto;
+    margin-left: auto;
+}
