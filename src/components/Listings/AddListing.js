@@ -59,6 +59,11 @@ export default function AddListing() {
     const handleChange = (setter) => (e) => setter(e.target.value);
 
     const submitListing = () => {
+        if (!name.trim() || !description.trim() || !address.trim() || !price.toString().trim() || !contact.trim()) {
+            alert("Please fill in all fields before submitting.");
+            return; 
+        }
+
         const listingsRef = ref(database, 'listings');
         const newListingRef = push(listingsRef);
         push(newListingRef, {
