@@ -3,6 +3,12 @@
     height: 406px;
 }
 
+.mainimage {
+    max-width: 296px;
+    max-height: 296px;
+}
+
+
 .text {
     font-family: Nunito Sans;
     font-size: 16px;
