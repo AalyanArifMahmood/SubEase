@@ -6,7 +6,7 @@ import { getAnalytics } from "firebase/analytics";
 import { TextField, PrimaryButton } from '@fluentui/react';
 import { DropzoneDialog } from 'material-ui-dropzone';
 import { mergeStyleSets } from "@fluentui/react";
-import { getDatabase, ref as databaseRef, push, set } from "firebase/database";
+import { getDatabase, ref as databaseRef, push, set, get } from "firebase/database";
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
@@ -66,39 +66,47 @@ export default function AddListing() {
             return;
         }
 
-        // Function to upload a single file to Firebase Storage and return the URL
-        const uploadFile = (file) => {
-            const uploadRef = storageRef(storage, `listings/${address}/${file.name}`);
-            return uploadBytes(uploadRef, file).then(snapshot => getDownloadURL(snapshot.ref));
-        };
-
-        // Upload all files and collect their URLs
-        Promise.all(files.map(file => uploadFile(file)))
-            .then(urls => {
-                // All files uploaded successfully, now add listing to database
-                const listingData = {
-                    name: name,
-                    description: description,
-                    address: address,
-                    price: Number(price),
-                    contact: contact,
-                    imageUrls: urls // Save all image URLs as an array
+        const addressRef = databaseRef(database, `listings/${address}`);
+        get(addressRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                alert("This address is already in the listings.");
+            } else {
+                // Function to upload a single file to Firebase Storage and return the URL
+                const uploadFile = (file) => {
+                    const uploadRef = storageRef(storage, `listings/${address}/${file.name}`);
+                    return uploadBytes(uploadRef, file).then(snapshot => getDownloadURL(snapshot.ref));
                 };
 
-                const newListingRef = databaseRef(database, `listings/${address}`);
-                set(newListingRef, listingData)
-                    .then(() => {
-                        alert("Listing added successfully with all images!");
+                // Upload all files and collect their URLs
+                Promise.all(files.map(file => uploadFile(file)))
+                    .then(urls => {
+                        const listingData = {
+                            name: name,
+                            description: description,
+                            address: address,
+                            price: Number(price),
+                            contact: contact,
+                            imageUrls: urls
+                        };
+
+                        set(addressRef, listingData)
+                            .then(() => {
+                                alert("Listing added successfully with all images!");
+                            })
+                            .catch(error => {
+                                console.error("Error saving listing to database: ", error);
+                                alert("Error saving listing");
+                            });
                     })
                     .catch(error => {
-                        console.error("Error saving listing to database: ", error);
-                        alert("Error saving listing");
+                        console.error("Error uploading files: ", error);
+                        alert("Error uploading images");
                     });
-            })
-            .catch(error => {
-                console.error("Error uploading files: ", error);
-                alert("Error uploading images");
-            });
+            }
+        }).catch(error => {
+            console.error("Error checking address existence: ", error);
+            alert("Error checking if address exists");
+        });
     };
 
 
