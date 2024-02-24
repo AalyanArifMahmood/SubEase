@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import Template from "@/Listings/Template";
+import Apartment from "@/Listings/Apartment";
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
     <p>
       Hello world
     </p>
-    <Template/>
+    <Apartment/>
     </>
   );
 }
