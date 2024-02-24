@@ -6,6 +6,7 @@ import { getAnalytics } from "firebase/analytics";
 import { TextField, PrimaryButton } from '@fluentui/react';
 import { DropzoneDialog } from 'material-ui-dropzone';
 import { mergeStyleSets } from "@fluentui/react";
+import { getDatabase, ref, push } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDRVw3h88OaQfxhP0sXorKT2wC8rZhoxDA",
@@ -37,6 +38,7 @@ const classNames = mergeStyleSets({
 });
 
 export default function AddListing() {
+    const database = getDatabase();
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => setOpen(true);
@@ -46,14 +48,39 @@ export default function AddListing() {
         handleClose();
     };
 
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [address, setAddress] = useState('');
+    const [price, setPrice] = useState('');
+    const [contact, setContact] = useState('');
+
+    const handleChange = (setter) => (e) => setter(e.target.value);
+
+    const submitListing = () => {
+        const listingsRef = ref(database, 'listings');
+        const newListingRef = push(listingsRef);
+        push(newListingRef, {
+            name,
+            description,
+            address,
+            price: Number(price), 
+            contact,
+        }).then(() => {
+            console.log("Listing added successfully!");
+        }).catch((error) => {
+            console.error("Error adding listing: ", error);
+        });
+    };
+
     return (
         <div>
             <div className={classNames.container}>
-                <TextField id={"name"} className={classNames.textField} label="Name of Listing" required />
-                <TextField id={"description"} className={classNames.textField} label="Description" autoAdjustHeight />
-                <TextField id={"address"} className={classNames.textField} label="Address" required />
-                <TextField id={"price"} className={classNames.textField} label="Price" type="number" prefix="$" />
-                <TextField id={"contact"} className={classNames.textField} label="Contact Information" required />
+                <TextField id={"name"} value={name} onChange={handleChange(setName)} className={classNames.textField} label="Name of Listing" required />
+                <TextField id={"description"} value={description} onChange={handleChange(setDescription)} className={classNames.textField} label="Description" autoAdjustHeight />
+                <TextField id={"address"} value={address} onChange={handleChange(setAddress)} className={classNames.textField} label="Address" required />
+                <TextField id={"price"} value={price} onChange={handleChange(setPrice)} className={classNames.textField} label="Price" type="number" prefix="$" />
+                <TextField id={"contact"} value={contact} onChange={handleChange(setContact)} className={classNames.textField} label="Contact Information" required />
+                <PrimaryButton onClick={submitListing}>Submit</PrimaryButton>
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
                 <PrimaryButton onClick={handleOpen}>
