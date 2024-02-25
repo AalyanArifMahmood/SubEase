@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+/* eslint-disable ..next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 "use client";
 
@@ -60,21 +60,21 @@ const Page = () => {
           <div className={styles.metaDataDiv}>
             <div className={styles.metaDataIcons}>
               <Weekend style={{ fontSize: 50 }} />
-              <CheckCircle style={{ color: "#58BB89" }} />
+              <CheckCircle style={{ color: "#58BB89" }} fontSize="large" />
             </div>
             <Divider orientation="vertical" />
             <div className={styles.metaDataIcons}>
               <Wifi style={{ fontSize: 50 }} />
-              <CheckCircle style={{ color: "#58BB89" }} />
+              <CheckCircle style={{ color: "#58BB89" }} fontSize="large" />
             </div>
             <Divider orientation="vertical" />
             <div className={styles.metaDataIcons}>
               <Pets style={{ fontSize: 50 }} />
-              <Cancel style={{ color: "#E22F2F" }} />
+              <Cancel style={{ color: "#E22F2F" }} fontSize="large" />
             </div>
             <Divider orientation="vertical" />
             <div className={styles.metaDataIcons}>
-              <KingBed style={{ fontSize: 50 }} />
+              <KingBed style={{ fontSize: 50 }} fontSize="large" />
               <p>2</p>
             </div>
           </div>
