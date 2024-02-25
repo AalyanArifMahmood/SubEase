@@ -1,5 +1,5 @@
 import React from "react";
-import AddListing from "@/app/AddListing/AddListing";
+import AddListing from "../AddListing/AddListing";
 
 const Page = () => {
   return <AddListing />;
