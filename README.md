@@ -1,3 +1,9 @@
+## Sub Ease
+
+A one stop place for students to seek subletter and find subleasing place as well as platform to sell used appliances.
+
+### Demo
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
