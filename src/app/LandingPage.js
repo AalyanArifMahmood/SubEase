@@ -2,12 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import { PrimaryButton } from '@fluentui/react/lib/Button';
+import {auth, provider} from "@/app/firebase";
 import { getAuth, getRedirectResult, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import Page from "@/app/itemDisplay/page";
 
 const LandingPage = () => {
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
     const [userNow, setUserNow] = useState([]);
     const [correct, setCorrect] = useState(true); // Assuming 'correct' is used somewhere
 

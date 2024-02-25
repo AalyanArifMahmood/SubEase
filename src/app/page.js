@@ -5,8 +5,8 @@ import LandingPage from "@/app/LandingPage";
 export default function Home() {
   return (
     <>
-        <Mainpage/>
-        {/*<LandingPage/>*/}
+        {/*<Mainpage/>*/}
+        <LandingPage/>
     </>
   );
 }
