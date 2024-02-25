@@ -3,9 +3,9 @@
 A one stop place for students to seek subletter and find subleasing place as well as platform to sell used appliances.
 
 ### Demo
-![Listing Pages](https://github.com/AalyanArifMahmood/SubEase/blob/main/public/listing-detail.png)
+![Listing Pages](https://github.com/AalyanArifMahmood/SubEase/blob/main/public/listing-detail.png =250x250)
 
-![Listing Detail Page](https://github.com/AalyanArifMahmood/SubEase/blob/main/public/listing-page.png)
+![Listing Detail Page](https://github.com/AalyanArifMahmood/SubEase/blob/main/public/listing-page.png =250x250)
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
