@@ -1,4 +1,10 @@
 .container {
     margin-left: 50px;
     margin-right: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.inner {
+    max-width: 1400px;
 }

@@ -2,9 +2,10 @@
     display: flex;
     justify-content: flex-start;
     position: relative;
-    width: 100%;
     align-items: center;
     height: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
   
 .button_container {
@@ -18,6 +19,9 @@
 .button_container_seasons {
     flex: 0 1 auto;
     margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .squiggle_left {
@@ -34,10 +38,57 @@
 
 .slider {
     position: absolute;
-    top: 6px;
-
+    top: 50%;
+    transform: translateY(-50%);
+    left: 33%;
 }
 
-.temp {
-    display: flex;
+.mini_house_icon {
+    position: absolute;
+    left: 39%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.mini_appliance_icon {
+    position: absolute;
+    left: 55%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.center {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.autumn {
+    position: absolute;
+    z-index: 100;
+    left: 88%;
+}
+
+.summer {
+    position: absolute;
+    z-index: 100;
+    left: 91%;
+}
+
+.spring {
+    position: absolute;
+    z-index: 100;
+    left: 94%;
+}
+
+.winter {
+    position: absolute;
+    z-index: 100;
+    left: 97%;
+}
+
+.season_slider {
+    position: absolute;
+    left: 97%;
+    transform: translateX(-22.5%);
 }
