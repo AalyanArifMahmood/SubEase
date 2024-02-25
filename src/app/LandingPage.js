@@ -5,6 +5,7 @@ import { PrimaryButton } from '@fluentui/react/lib/Button';
 import {auth, provider} from "@/app/firebase";
 import { getAuth, getRedirectResult, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import Page from "@/app/itemDisplay/page";
+import Mainpage from "@/components/Mainpage/Mainpage";
 
 const LandingPage = () => {
     const [userNow, setUserNow] = useState([]);
@@ -49,7 +50,7 @@ const LandingPage = () => {
         );
     } else {
         if (userNow[0].email.slice(userNow[0].email.length - 15) === "@macalester.edu") {
-            return <Page userNow={userNow} />;
+            return <Mainpage userNow={userNow} />;
         } else {
             return (
                 <div style={{ textAlign: "center" }}>
