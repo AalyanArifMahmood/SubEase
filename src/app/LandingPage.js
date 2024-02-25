@@ -5,7 +5,7 @@ import { PrimaryButton } from '@fluentui/react/lib/Button';
 import {auth, provider} from "@/app/firebase";
 import { getAuth, getRedirectResult, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import Page from "@/app/itemDisplay/page";
-import Mainpage from "@/components/Mainpage/Mainpage";
+import Mainpage from "../components/Mainpage/Mainpage";
 
 const LandingPage = () => {
     const [userNow, setUserNow] = useState([]);
