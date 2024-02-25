@@ -6,7 +6,9 @@ import UserIcon from "../userIcon/UserIcon";
 const Navbar = () => {
   return (
     <div className={styles.navbar}>
-      <div>loglo</div>
+      <div>
+        <img src="/subease.png" style={{ width: 90 }} />
+      </div>
       <Search />
       <UserIcon />
     </div>
