@@ -5,7 +5,16 @@
 import React from "react";
 import styles from "./page.module.css";
 import Navbar from "../../components/common/Navbar/Navbar";
-import { EmojiNature } from "@material-ui/icons";
+import {
+  Cancel,
+  CheckCircle,
+  EmojiNature,
+  KingBed,
+  Pets,
+  Weekend,
+  Wifi,
+} from "@material-ui/icons";
+import { Divider } from "@material-ui/core";
 
 const Page = () => {
   return (
@@ -47,31 +56,45 @@ const Page = () => {
               <div className={styles.actionButton}>Contact Student</div>
             </div>
           </div>
-          <div className={styles.metaDataDiv}>hi</div>
-          <div className={styles.metaDataDiv}>hi</div>
+
+          <div className={styles.metaDataDiv}>
+            <div className={styles.metaDataIcons}>
+              <Weekend style={{ fontSize: 50 }} />
+              <CheckCircle style={{ color: "#58BB89" }} />
+            </div>
+            <Divider orientation="vertical" />
+            <div className={styles.metaDataIcons}>
+              <Wifi style={{ fontSize: 50 }} />
+              <CheckCircle style={{ color: "#58BB89" }} />
+            </div>
+            <Divider orientation="vertical" />
+            <div className={styles.metaDataIcons}>
+              <Pets style={{ fontSize: 50 }} />
+              <Cancel style={{ color: "#E22F2F" }} />
+            </div>
+            <Divider orientation="vertical" />
+            <div className={styles.metaDataIcons}>
+              <KingBed style={{ fontSize: 50 }} />
+              <p>2</p>
+            </div>
+          </div>
+
+          <div className={styles.metaDataDiv}>
+            <div className={styles.personHeader}>
+              <img src="/Person.png" />
+              <p className={styles.personTitle}>Michelle Johnson</p>
+            </div>
+            <p className={styles.personDesc}>
+              Michelle is a senior at Macalester studying Economics and
+              Political Science. I am leaving for study abroad and would like a
+              clean person to take over the apartment.
+            </p>
+          </div>
         </div>
+        <div style={{ height: 50 }}> </div>
       </div>
     </div>
   );
 };
 
 export default Page;
-{
-  /* <div
-          style={
-            dark
-              ? { opacity: 0, "user-select": none }
-              : {
-                  opacity: 1,
-                  backgroundColor: "black",
-                  width: "300%",
-                  height: "300%",
-                  top: -100,
-                  left: -100,
-                  position: "absolute",
-                  zIndex: -1,
-                  "user-select": none,
-                }
-          }
-        ></div> */
-}
