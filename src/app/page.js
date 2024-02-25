@@ -1,13 +1,12 @@
 import styles from "./page.module.css";
-import Holder from "../components/Apartment/Holder";
-import AddListing from "@/components/Listings/AddListing";
+import Mainpage from "@/components/Mainpage/Mainpage";
 import LandingPage from "@/app/LandingPage";
 
 export default function Home() {
   return (
     <>
-      {/*<Holder/>*/}
-      <LandingPage/>
+        <Mainpage/>
+        {/*<LandingPage/>*/}
     </>
   );
 }
